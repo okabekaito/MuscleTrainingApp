@@ -9,7 +9,7 @@ function Example() {
                     <div className="card">
                         <div className="card-header">React導入完了</div>
                         <div className="card-body">pages下に移動</div>
-                        <Button color='primary' variant='contained'>Homeに変異ボタン</Button>
+                        <Button color='primary' variant='contained' href={`/`}>Homeに変異ボタン</Button>
                     </div>
                 </div>
             </div>
