@@ -20,7 +20,6 @@ class PostController extends Controller
         $post->menu = $request->menu;
         $post->num = $request->num;
         $post->description = $request->description;
-        $post->timestamps = $request->timestamps;
         $post->save();
         return response()->json($post, 200);
     }

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Button,Card, createStyles, makeStyles } from "@material-ui/core";
 import MainTable from "../components/MainTable";
 import axios from "axios";
+import PostFrom from '../components/PostFrom';
 
 const useStyles = makeStyles((theme) => createStyles({
     card: {
@@ -16,6 +17,9 @@ function Home() {
     const classes = useStyles();
 
     const [posts, setPosts] = useState([]);
+
+    const [formData,setFormData] = useState({menu:'',num:0,description:''});
+
     useEffect(() =>  {
         getPostsData();
     },[])
@@ -25,12 +29,45 @@ function Home() {
             .get('/api/posts')
             .then(response => {
                 setPosts(response.data);
-                console.log(response.data);
             })
             .catch(() => {
                 console.log('通信に失敗しました');
             });
     }
+
+    const inputChange = (e) => {
+        const key = e.target.name;
+        const value = e.target.value;
+        formData[key] = value;
+        let data = Object.assign({}, formData);
+        setFormData(data);
+    }
+
+
+    const createPost = async() => {
+        //空だと弾く
+        if(formData == ''){
+            return;
+        }
+        //入力値を投げる
+        await axios
+            .post('/api/post/create', {
+                menu: formData.menu,
+                num: formData.num,
+                description: formData.description
+            })
+            .then((res) => {
+                //戻り値をtodosにセット
+                const tempPosts = posts
+                tempPosts.push(res.data);
+                setPosts(tempPosts)
+                setFormData('');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
 
     let rows =[];
 
@@ -49,6 +86,9 @@ function Home() {
                 <div className="col-md-10">
                     <div className="card">
                         <h1>筋トレ管理</h1>
+                        <Card className={classes.card}>
+                            <PostFrom data={formData} btnFunc={createPost} inputChange={inputChange} />
+                        </Card>
                         <Card className={classes.card}>
                             <MainTable headerList={headerList}rows={rows} />
                         </Card>
