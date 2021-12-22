@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Button,Card, createStyles, makeStyles } from "@material-ui/core";
 import MainTable from "../components/MainTable";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => createStyles({
     card: {
@@ -28,6 +29,18 @@ let rows = [
 
 function Home() {
     const classes = useStyles();
+
+    const [posts, setPosts] = useState([]);
+
+    axios
+        .get('/api/posts')
+        .then(response => {
+            setPosts(response.data);     //バックエンドから返ってきたデータでpostsを更新する
+            console.log(response.data); //取得データ確認用のconsole.log()
+        })
+        .catch(() => {
+            console.log('通信に失敗しました');
+        });
 
     return (
         <div className='container'>
