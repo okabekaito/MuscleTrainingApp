@@ -1,19 +1,11 @@
 import React from "react";
-import { Button,Card, createStyles, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
-import Paper from '@material-ui/core/Paper';
-import purple from '@material-ui/core/colors/purple';
-import { map } from "lodash";
+import { Button,Card, createStyles, makeStyles } from "@material-ui/core";
+import MainTable from "../components/MainTable";
 
 const useStyles = makeStyles((theme) => createStyles({
     card: {
         margin: theme.spacing(5),
         padding: theme.spacing(3),
-    },
-    table: {
-        minWidth: 650,
-    },
-    tableHead: {
-        backgroundColor: purple['A100'],
     },
 }));
 
@@ -43,33 +35,8 @@ function Home() {
                 <div className="col-md-10">
                     <div className="card">
                         <h1>筋トレ管理</h1>
-                        <Card className={classes.name}>
-
-                            <TableContainer component={Paper}>
-                                <Table className={classes.table} aria-label='simple table'>
-
-                                    <TableHead className={classes.tableHead}>
-                                        <TableRow>
-                                            {headerList.map((item,index) => (
-                                                <TableCell align="center" key={index}>{item}</TableCell>
-                                            ))}
-                                        </TableRow>
-                                    </TableHead>
-
-                                    <TableBody>
-                                        {rows.map((row,index) => (
-                                            <TableRow key={index}>
-                                                {Object.keys(row).map(function(key,i){
-                                                    return (
-                                                        <TableCell align="center" key={i}>{row[key]}</TableCell>
-                                                    )
-                                                })};
-
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
+                        <Card className={classes.card}>
+                            <MainTable headerList={headerList}rows={rows} />
                         </Card>
                     </div>
                 </div>
