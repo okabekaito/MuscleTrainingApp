@@ -2,6 +2,7 @@ import React from "react";
 import { Button,Card, createStyles, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import purple from '@material-ui/core/colors/purple';
+import { map } from "lodash";
 
 const useStyles = makeStyles((theme) => createStyles({
     card: {
@@ -17,6 +18,21 @@ const useStyles = makeStyles((theme) => createStyles({
 }));
 
 const headerList = ['日付','詳細','編集','完了'];
+
+let rows = [
+    {
+        created_at: '1月1日',
+        showBtn: <Button color="success" variant="contained">詳細</Button>,
+        editBtn: <Button color="secondary" variant="contained">編集</Button>,
+        deleteBtn: <Button color="primary" variant="contained">削除</Button>,
+    },
+    {
+        created_at: '2月2日',
+        showBtn: <Button color="success" variant="contained">詳細</Button>,
+        editBtn: <Button color="secondary" variant="contained">編集</Button>,
+        deleteBtn: <Button color="primary" variant="contained">削除</Button>,
+    },
+]
 
 function Home() {
     const classes = useStyles();
@@ -41,18 +57,16 @@ function Home() {
                                     </TableHead>
 
                                     <TableBody>
-                                        <TableRow>
-                                            <TableCell align="center">1月1日</TableCell>
-                                            <TableCell align="center"><Button color='success' variant="contained">詳細</Button></TableCell>
-                                            <TableCell align="center"><Button color='secondary' variant="contained">編集</Button></TableCell>
-                                            <TableCell align="center"><Button color='primary' variant="contained">完了</Button></TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell align="center">2月2日</TableCell>
-                                            <TableCell align="center"><Button color='success' variant="contained">詳細</Button></TableCell>
-                                            <TableCell align="center"><Button color='secondary' variant="contained">編集</Button></TableCell>
-                                            <TableCell align="center"><Button color='primary' variant="contained">完了</Button></TableCell>
-                                        </TableRow>
+                                        {rows.map((row,index) => (
+                                            <TableRow key={index}>
+                                                {Object.keys(row).map(function(key,i){
+                                                    return (
+                                                        <TableCell align="center" key={i}>{row[key]}</TableCell>
+                                                    )
+                                                })};
+
+                                            </TableRow>
+                                        ))}
                                     </TableBody>
                                 </Table>
                             </TableContainer>
