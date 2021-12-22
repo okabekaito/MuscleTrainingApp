@@ -11569,13 +11569,20 @@ function Home() {
       posts = _useState2[0],
       setPosts = _useState2[1];
 
-  axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/posts').then(function (response) {
-    setPosts(response.data); //バックエンドから返ってきたデータでpostsを更新する
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getPostsData();
+  }, []);
 
-    console.log(response.data); //取得データ確認用のconsole.log()
-  })["catch"](function () {
-    console.log('通信に失敗しました');
-  });
+  var getPostsData = function getPostsData() {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/posts').then(function (response) {
+      setPosts(response.data); //バックエンドから返ってきたデータでpostsを更新する
+
+      console.log(response.data); //取得データ確認用のconsole.log()
+    })["catch"](function () {
+      console.log('通信に失敗しました');
+    });
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {

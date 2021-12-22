@@ -31,16 +31,21 @@ function Home() {
     const classes = useStyles();
 
     const [posts, setPosts] = useState([]);
+    useEffect(() =>  {
+        getPostsData();
+    },[])
 
-    axios
-        .get('/api/posts')
-        .then(response => {
-            setPosts(response.data);     //バックエンドから返ってきたデータでpostsを更新する
-            console.log(response.data); //取得データ確認用のconsole.log()
-        })
-        .catch(() => {
-            console.log('通信に失敗しました');
-        });
+    const getPostsData = () => {
+        axios
+            .get('/api/posts')
+            .then(response => {
+                setPosts(response.data);
+                console.log(response.data);
+            })
+            .catch(() => {
+                console.log('通信に失敗しました');
+            });
+    }
 
     return (
         <div className='container'>
