@@ -11524,42 +11524,7 @@ var useStyles = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"])(fu
     }
   });
 });
-var headerList = ['日付', '詳細', '編集', '完了'];
-var rows = [{
-  created_at: '1月1日',
-  showBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    color: "success",
-    variant: "contained",
-    children: "\u8A73\u7D30"
-  }),
-  editBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    color: "secondary",
-    variant: "contained",
-    children: "\u7DE8\u96C6"
-  }),
-  deleteBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    color: "primary",
-    variant: "contained",
-    children: "\u524A\u9664"
-  })
-}, {
-  created_at: '2月2日',
-  showBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    color: "success",
-    variant: "contained",
-    children: "\u8A73\u7D30"
-  }),
-  editBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    color: "secondary",
-    variant: "contained",
-    children: "\u7DE8\u96C6"
-  }),
-  deleteBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    color: "primary",
-    variant: "contained",
-    children: "\u524A\u9664"
-  })
-}];
+var headerList = ['日付', '部位', '詳細', '編集', '完了'];
 
 function Home() {
   var classes = useStyles();
@@ -11575,14 +11540,35 @@ function Home() {
 
   var getPostsData = function getPostsData() {
     axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/posts').then(function (response) {
-      setPosts(response.data); //バックエンドから返ってきたデータでpostsを更新する
-
-      console.log(response.data); //取得データ確認用のconsole.log()
+      setPosts(response.data);
+      console.log(response.data);
     })["catch"](function () {
       console.log('通信に失敗しました');
     });
   };
 
+  var rows = [];
+  posts.map(function (post) {
+    return rows.push({
+      created_at: post.created_at,
+      menu: post.menu,
+      showBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        color: "success",
+        variant: "contained",
+        children: "\u8A73\u7D30"
+      }),
+      editBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        color: "secondary",
+        variant: "contained",
+        children: "\u7DE8\u96C6"
+      }),
+      deleteBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        color: "primary",
+        variant: "contained",
+        children: "\u524A\u9664"
+      })
+    });
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {

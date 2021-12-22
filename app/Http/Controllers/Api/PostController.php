@@ -13,4 +13,15 @@ class PostController extends Controller
         $posts = Post::all();
         return response()->json($posts, 200);
     }
+
+    public function create(Request $request)
+    {
+        $post = new Post;
+        $post->menu = $request->menu;
+        $post->num = $request->num;
+        $post->description = $request->description;
+        $post->timestamps = $request->timestamps;
+        $post->save();
+        return response()->json($post, 200);
+    }
 }

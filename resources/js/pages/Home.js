@@ -10,22 +10,7 @@ const useStyles = makeStyles((theme) => createStyles({
     },
 }));
 
-const headerList = ['日付','詳細','編集','完了'];
-
-let rows = [
-    {
-        created_at: '1月1日',
-        showBtn: <Button color="success" variant="contained">詳細</Button>,
-        editBtn: <Button color="secondary" variant="contained">編集</Button>,
-        deleteBtn: <Button color="primary" variant="contained">削除</Button>,
-    },
-    {
-        created_at: '2月2日',
-        showBtn: <Button color="success" variant="contained">詳細</Button>,
-        editBtn: <Button color="secondary" variant="contained">編集</Button>,
-        deleteBtn: <Button color="primary" variant="contained">削除</Button>,
-    },
-]
+const headerList = ['日付','部位','詳細','編集','完了'];
 
 function Home() {
     const classes = useStyles();
@@ -46,6 +31,17 @@ function Home() {
                 console.log('通信に失敗しました');
             });
     }
+
+    let rows =[];
+
+    posts.map((post) => 
+    rows.push({
+        created_at: post.created_at,
+        menu: post.menu,
+        showBtn: <Button color="success" variant="contained">詳細</Button>,
+        editBtn: <Button color="secondary" variant="contained">編集</Button>,
+        deleteBtn: <Button color="primary" variant="contained">削除</Button>,
+    }))
 
     return (
         <div className='container'>
