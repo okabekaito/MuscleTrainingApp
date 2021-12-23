@@ -76,7 +76,7 @@ function Home() {
         created_at: post.created_at,
         menu: post.menu,
         showBtn: <Button color="success" variant="contained">詳細</Button>,
-        editBtn: <Button color="secondary" variant="contained">編集</Button>,
+        editBtn: <Button color="secondary" variant="contained" key={post.id} href={`/post/edit/${post.id}`}>編集</Button>, 
         deleteBtn: <Button color="primary" variant="contained">削除</Button>,
     }))
 

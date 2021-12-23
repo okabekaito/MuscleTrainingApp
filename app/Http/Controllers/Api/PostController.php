@@ -23,4 +23,21 @@ class PostController extends Controller
         $post->save();
         return response()->json($post, 200);
     }
+
+    public function edit(Request $request)
+    {
+        $post = Post::find($request->id);
+        return $post;
+    }
+
+    public function update(Request $request)
+    {
+        $post = Post::find($request->id);
+        $post->menu = $request->menu;
+        $post->num = $request->num;
+        $post->description = $request->description;
+        $post->save();
+        $posts = Post::all();
+        return $posts;
+    }
 }
