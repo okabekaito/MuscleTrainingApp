@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => createStyles({
     },
 }));
 
-const headerList = ['日付','部位','詳細','編集','削除'];
+const headerList = ['日付','部位','回数','メモ','編集','削除'];
 
 function Home() {
     const classes = useStyles();
@@ -90,7 +90,8 @@ function Home() {
     rows.push({
         created_at: post.created_at,
         menu: post.menu,
-        showBtn: <Button color="success" variant="contained">詳細</Button>,
+        num: post.num,
+        description: post.description,
         editBtn: <Button color="secondary" variant="contained" key={post.id} href={`/post/edit/${post.id}`}>編集</Button>, 
         deleteBtn: <Button color="primary" variant="contained" href="/" onClick={() => deletePost(post)}>削除</Button>,
     }))

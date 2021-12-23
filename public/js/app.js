@@ -19898,7 +19898,7 @@ var useStyles = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])(fu
     }
   });
 });
-var headerList = ['日付', '部位', '詳細', '編集', '削除'];
+var headerList = ['日付', '部位', '回数', 'メモ', '編集', '削除'];
 
 function Home() {
   var _this = this;
@@ -20016,11 +20016,8 @@ function Home() {
     return rows.push({
       created_at: post.created_at,
       menu: post.menu,
-      showBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        color: "success",
-        variant: "contained",
-        children: "\u8A73\u7D30"
-      }),
+      num: post.num,
+      description: post.description,
       editBtn: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"], {
         color: "secondary",
         variant: "contained",
