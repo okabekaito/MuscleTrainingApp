@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => createStyles({
     },
 }));
 
-const headerList = ['日付','部位','詳細','編集','完了'];
+const headerList = ['日付','部位','詳細','編集','削除'];
 
 function Home() {
     const classes = useStyles();
@@ -68,6 +68,21 @@ function Home() {
             });
     }
 
+    const deletePost = async (post) => {
+        await axios
+            .post('/api/delete', {
+            id: post.id
+        })
+        .then((res) => {
+            this.setState({
+                posts: res.posts
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
 
     let rows =[];
 
@@ -77,7 +92,7 @@ function Home() {
         menu: post.menu,
         showBtn: <Button color="success" variant="contained">詳細</Button>,
         editBtn: <Button color="secondary" variant="contained" key={post.id} href={`/post/edit/${post.id}`}>編集</Button>, 
-        deleteBtn: <Button color="primary" variant="contained">削除</Button>,
+        deleteBtn: <Button color="primary" variant="contained" href="/" onClick={() => deletePost(post)}>削除</Button>,
     }))
 
     return (
